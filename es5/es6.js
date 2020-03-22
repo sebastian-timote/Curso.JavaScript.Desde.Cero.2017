@@ -5,4 +5,4 @@ var saludar = function saludar(name) {
 }; //esto es testing
 
 
-saludar('timo');
+saludar('sebis');

@@ -1,3 +1,5 @@
+//programa de una lista de tareas
+//funcional
 class Task {
     constructor(name) {
         this.name = name;
@@ -23,19 +25,22 @@ class TaskList {
     }
     renderTask(element){
         let tasks = this.tasks.map( task => `
-            <li class="task">
-                <input type="checkbox" class="task__complete-button">
+            <li class="task ${task.isComplete ? 'complete' : ''}">
+                <input type="checkbox" 
+                       class="task__complete-button"
+                       ${task.isComplete ? 'checked' : ''}
+                       >
                 <span class="task__name">${task.name}</span>
                 <a href="#" class="task__remove-button">X</a>
             </li>
         `);
-        element.innerHTML = tasks.reduce((a,b) => a + b);
+        element.innerHTML = tasks.reduce((a,b) => a + b, '');//el '' es para cuando borremos no nos quede el array vacio y no produzca error
     }
 }
 
 //trabajar con el DOM
 const addTaskElement = document.getElementById('add-task');//input
-const TaskContainerElement = document.getElementById('tasks-container');//ul
+const taskContainerElement = document.getElementById('tasks-container');//ul
 const inbox = new TaskList('inbox');
 //anadir tarea al DOM
 function addDOMtask (e, list = inbox){
@@ -44,10 +49,41 @@ function addDOMtask (e, list = inbox){
         //crear la tarea instanciando la clase
         let task = new Task(this.value);//envia el valor del input
         //anadir latarea a la lista
-        list.addTask(task, TaskContainerElement);
+        list.addTask(task, taskContainerElement);
         //borrar texto del input
         this.value ='';
     }
 }
 addTaskElement.addEventListener('keyup',addDOMtask);//escucha el input
+
+//obtener el indice de la tarea actual
+function getTaskIndex(e) {
+    let taskItem = e.target.parentElement;//conseguimos lu
+    let tasksItems = [...taskContainerElement.querySelectorAll('li')];//convretidmos a array con ...
+    return tasksItems.indexOf(taskItem);//obtenemos index
+}
+//eliminar tarea desde el DOM
+function removeDomTask(e, list = inbox) {
+    //detectamos que se hizo click en el enlace
+    if (e.target.tagName === "A"){
+
+        //remover tarea de la lista se necesita el indice
+        list.removeTask(getTaskIndex(e), taskContainerElement);
+    }
+}
+taskContainerElement.addEventListener('click',removeDomTask);//escucha el clic de la X
+
+function completeDOMtask(e, list = inbox) {
+    //detectamos que se hizo click en el input checked
+    if (e.target.tagName === 'INPUT'){
+        //completar  la tarea de la lista (se necesita el indice)
+        list.tasks[getTaskIndex(e)].complete();//llamamos el atributo array tasks de TaskList y completamos la tarea
+        //parentelement = taskContainerElement que es el lu
+        //classList = es una lista de todas las clases del elemento
+        //toggle() =anade o quita una clase.
+        e.target.parentElement.classList.toggle('complete');//para ver el cambio en el dom modificamos el nombre dela clase que este checked
+        console.table(list.tasks);//imprimimos una tabla en consola
+    }
+}
+taskContainerElement.addEventListener('click',completeDOMtask);//escucha el input
 
