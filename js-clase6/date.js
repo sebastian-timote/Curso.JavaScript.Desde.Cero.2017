@@ -107,7 +107,15 @@ horarios y fechas internacionales
 .getUTC... valor de hora internacional
 .getTimeZoneOffset() -> devuelve la diferencia en minutos de la hora zero del meridiano de greenwitch a tu zona horaria
  */
-let date = new Date();
-console.log(date.getHours());
-console.log(date.getUTCHours());
-console.log(date.getTimezoneOffset());
+let date = new Date('Fri Mar 27 2020 14:00:00 GMT-0500');
+//console.log(date.getHours());
+// console.log(date.getUTCHours());
+// console.log(date.getTimezoneOffset() / 60);
+/*CODIGO PARA MOSTRAR LA FECHA
+*
+* */
+let hours = date.getHours(),
+    utchours = date.getUTCHours(),
+    diffhours = new Date().getTimezoneOffset() /60;//toma la diferencia hora del pais su valor es en minutos
+console.log(hours,utchours,diffhours);
+document.body.textContent = `${utchours - diffhours}`;
