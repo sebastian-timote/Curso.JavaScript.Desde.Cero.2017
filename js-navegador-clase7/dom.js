@@ -77,20 +77,71 @@
 
 
  */
-
+let menu = document.getElementById('menu'),
+    menuLinks = [...menu.querySelectorAll('a')],
+    menuItems = [...menu.querySelectorAll('li')];
+console.dir(menuItems[1]);
 /*
 * PROPIEDADES DE LOS ELEMENTOS
 * como accedo al contenido
 *  contenido:
 *   .textContent -> texto plano del elemento (lectura y escritura)
 *   .innerHTML -> HTML interno de un elemento
+*
+*  Atributos
+*   .attributes -> trae todos los atributos de un elemento
+*   .getAttribute('atributo') -> consigue solo el atribute indicado
+*   .setAttribute('atri', 'value')
+*   ejemplo: checkbox.setAttribute('checked', 'true')
+*   .removeAttribute('atri') -> removerlo
+*
+* clases
+*   .classList -> es un objeto devuelve un node list con todas las clases
+*       .add('className') -> anade clase
+*       .remove('className') -> quitar clase
+*       .toggle('className') -> cambia la clase la quita o la pone
+*       .contains('className') -> devuelve true si el elemento contiene esa clase
+*
+* estilos css
+* esto se deberia de usar para estilos dinamicos y no estaticos
+* dinamico es que mantenga haciendo calculos
+*   .style -> no es para leer es para escribir propiedades css
+*       .cssProperty (usar camelCase en lugar de guiones EJ background-color a backgroundColor )
  */
+let item = menuItems[1];
 
-let menu = document.getElementById('menu'),
-    menuLinks = [...menu.querySelectorAll('a')],
-    menuItems = [...menu.querySelectorAll('li')];
-console.dir(menuItems[1]);
+/*
+* transformar el DOM
+*
+* crear elementos
+*   document.createElement('tagName')
+* let element = '<div>hola</div>' -> no es un elemento DOM si no un string
+*
+* insertar elementos
+*   .appendChild() -> inserta un elemento al final del padre
+*       EJ:   parent.appendChild(element)
+*   .insertBefore() -> insertar un elemento antes de otro
+*       EJ:   parent.insertBefore(newElement, nextElement)
+*             parent -> elemento padre
+*             newElement -> elemento a insertar
+*             nextElement   -> elemento ya existente antes del cual se insertara
+*
+* eliminar y mover elementos
+*   parent.removeChild(element) -> eliminamos respecto al padre y me devuelve el elemento eliminado
+*       elimina element de parent
+*   element.remove() -> eliminamos por si solo devuelve undefine
+*       elimina element
+ */
+// let el = document.createElement('li');
+// el.textContent = 'soy un nuevo elemento';
+//menu.appendChild(el);
+//menu.insertBefore(el, menuItems[1]);
 
+/*
+cambio un elemento del inicio al final
+ */
+let el = menu.removeChild(menuItems[0]);
+menu.appendChild(el);
 
 
 
