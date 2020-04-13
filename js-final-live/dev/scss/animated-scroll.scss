@@ -1,0 +1,18 @@
+.animated-scroll__content{
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 4em;
+  line-height: 1.8em;
+}
+
+.animated-scroll__menu {
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  text-align: center;
+  grid-gap: .5em;
+}
+

@@ -1,0 +1,13 @@
+extends templates/template
+block main
+    h1 Lightbox gallery
+    .gallery-container#gallery-container
+        - var n = 1
+        - var descriptions = ['Tigre','Tigre de bengala','Leon','Leopardo','Guepardo','Jaguar','Pantera','Tigrillo','Gato']
+        while n <= 9
+            .gallery-item
+                img(src="images/gallery-" + n + "-thumb.jpg" alt= descriptions[n - 1]).gallery-img
+            -n++
+    script(src='js/lightbox.js')
+    script.
+        lightbox(document.getElementById('gallery-container'));//llamamos al lightbox.js
