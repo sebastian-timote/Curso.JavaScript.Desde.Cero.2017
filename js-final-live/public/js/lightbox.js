@@ -80,6 +80,7 @@ var navigateLightbox = function navigateLightbox(lightboxElement, i, larges, des
       counter = lightboxElement.querySelector('span'),
       closeButton = lightboxElement.querySelector('.close-modal');
   window.addEventListener('keyup', function (e) {
+    console.log(e);
     if (e.key === 'ArrowRight') nextButton.click();
     if (e.key === 'ArrowLeft') prevButton.click();
     if (e.key === 'Escape') closeButton.click();
